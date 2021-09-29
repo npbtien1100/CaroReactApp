@@ -78,8 +78,6 @@ class Game extends React.Component {
   handleChange() {
     const temp = document.querySelector("#sizeBoardInput").value;
     const size = parseInt(temp);
-    console.log(size);
-    console.log(typeof size);
     if (size >= 0) {
       this.setState({
         sizeBoard: size,
@@ -143,7 +141,6 @@ class Game extends React.Component {
 
     //status
     let status;
-    console.log(winner);
     if (winner) {
       status = <b>Winner: {this.state.xIsNext ? "O" : "X"}</b>;
     } else if (isBoardFull(current.squares)) {
@@ -195,25 +192,6 @@ class Game extends React.Component {
 
 ReactDOM.render(<Game />, document.getElementById("root"));
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return [a, b, c];
-    }
-  }
-  return null;
-}
 
 function isBoardFull(squares) {
   for (const i of squares) {
@@ -224,12 +202,9 @@ function isBoardFull(squares) {
 
 function calculateWinnerDummy(squares) {
   const squaresLength = squares.length;
-  console.log("squares: ", squares);
-  console.log("squares length: ", squaresLength);
   const size = Math.sqrt(squaresLength);
   let sizeCheck = size;
   if (size > 5) sizeCheck = 5;
-  console.log({ size: size, sizeCheck: sizeCheck });
 
   //checkwin
   for (let i = 0; i < squaresLength; i++) {
